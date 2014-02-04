@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Bog.Web.Api.WebApiApplication" Language="C#" %>

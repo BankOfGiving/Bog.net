@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Bog.Web.Dashboard.MvcApplication" Language="C#" %>

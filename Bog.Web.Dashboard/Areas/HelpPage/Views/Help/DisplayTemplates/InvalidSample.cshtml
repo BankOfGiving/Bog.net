@@ -1,0 +1,12 @@
+@model Bog.Web.Dashboard.Areas.HelpPage.InvalidSample
+
+@if (HttpContext.Current.IsDebuggingEnabled)
+{
+    <div class="warning-message-container">
+        <p>@(this.Model.ErrorMessage)</p>
+    </div>
+}
+else
+{
+    <p>Sample not available.</p>
+}

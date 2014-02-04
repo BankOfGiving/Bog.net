@@ -1,0 +1,74 @@
+﻿namespace Bog.Data.Entities
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.Composition;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    using AutoMapper;
+
+    using Bog.Composition;
+    using Bog.Data.Entities.Contracts;
+    using Bog.Domain.Entities;
+
+    /// <summary>
+    /// The donation data.
+    /// </summary>
+    [Table("Donations")]
+    public class DonationData : DataEntityBase
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DonationData"/> class.
+        /// </summary>
+        /// <param name="actingAccount">
+        /// The acting account.
+        /// </param>
+        ////public DonationData(IAccount actingAccount)
+        ////{
+        ////}
+
+        /// <summary>
+        /// Gets or sets the donation id.
+        /// </summary>
+        public int DonationId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        public DonationTypeData Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the tags.
+        /// </summary>
+        public virtual ICollection<TagData> Tags { get; set; }
+
+        /// <summary>
+        /// The entity mapping.
+        /// </summary>
+        [Export(typeof(IEntityMapping))]
+        public class EntityMapping : IEntityMapping
+        {
+            /// <summary>
+            /// The register mapping definitions.
+            /// </summary>
+            /// <param name="mapper">
+            /// The mapper.
+            /// </param>
+            public void CreateMap(IProfileExpression mapper)
+            {
+                Mapper.CreateMap<DonationData, Donation>();
+                Mapper.CreateMap<Donation, DonationData>();
+            }
+        }
+    }
+}
