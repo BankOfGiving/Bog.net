@@ -61,17 +61,11 @@
             app.UseOAuthBearerTokens(OAuthOptions);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            app.UseMicrosoftAccountAuthentication(
-            clientId: "000000004C107D13",
-            clientSecret: "C5EFKmId45HlG0H0X65Rqidc1h7Fcw1A");
+            app.UseMicrosoftAccountAuthentication("000000004C107D13", "C5EFKmId45HlG0H0X65Rqidc1h7Fcw1A");
 
-            app.UseTwitterAuthentication(
-            consumerKey: "9d61pQQu1XuCkc8Op6IqA",
-            consumerSecret: "bABg2DdiTa2tL0weeS4Y4VTAux87QWPi7zEa0IqFYg");
+            app.UseTwitterAuthentication("9d61pQQu1XuCkc8Op6IqA", "bABg2DdiTa2tL0weeS4Y4VTAux87QWPi7zEa0IqFYg");
 
-            app.UseFacebookAuthentication(
-            appId: "178224175708352",
-            appSecret: "0f75d3ce541c9271abe13256fd4d6645");
+            app.UseFacebookAuthentication("178224175708352", "0f75d3ce541c9271abe13256fd4d6645");
 
             app.UseGoogleAuthentication();
         }

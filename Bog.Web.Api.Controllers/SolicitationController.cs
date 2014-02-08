@@ -3,7 +3,7 @@
     using System.Web.Http;
 
     /// <summary>
-    /// The solicitation controller.
+    ///     The solicitation controller.
     /// </summary>
     public class SolicitationController : ApiController
     {

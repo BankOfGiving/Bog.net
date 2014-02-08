@@ -1,16 +1,21 @@
 namespace Bog.Data.Entities.Contracts
 {
-    using System;
-
     /// <summary>
-    /// The trackable entity.
+    ///     The trackable entity.
     /// </summary>
-    public class TrackableEntity // : ITrackableEntity
+    public class TrackableEntity
     {
+        // : ITrackableEntity
+        #region Fields
+
         /// <summary>
-        /// The acting account.
+        ///     The acting account.
         /// </summary>
         private readonly IAccount actingAccount;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackableEntity"/> class.
@@ -22,6 +27,8 @@ namespace Bog.Data.Entities.Contracts
         {
             this.actingAccount = actingAccount;
         }
+
+        #endregion
 
         /////// <summary>
         /////// Gets or sets the created by.

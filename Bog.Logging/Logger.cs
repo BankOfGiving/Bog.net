@@ -4,7 +4,7 @@
     using System.Diagnostics;
 
     /// <summary>
-    /// The logger.
+    ///     The logger.
     /// </summary>
     public static class Logger
     {

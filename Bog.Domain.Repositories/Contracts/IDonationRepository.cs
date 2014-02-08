@@ -1,21 +1,21 @@
 ﻿namespace Bog.Domain.Repositories.Contracts
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     using Bog.Domain.Entities;
 
     /// <summary>
-    /// The DonationRepository interface.
+    ///     The DonationRepository interface.
     /// </summary>
     public interface IDonationRepository
     {
+        #region Public Methods and Operators
+
         /// <summary>
-        /// The get donation headers only with no instances instances.
+        ///     The get donation headers only with no instances instances.
         /// </summary>
         /// <returns>
-        /// The <see cref="IEnumerable{T}"/>.
+        ///     The <see cref="IEnumerable{T}" />.
         /// </returns>
         IEnumerable<Donation> Get();
 
@@ -92,5 +92,7 @@
         /// The <see cref="bool"/>.
         /// </returns>
         Donation Save(Donation donation);
+
+        #endregion
     }
 }

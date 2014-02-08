@@ -1,10 +1,8 @@
-@using System.Web.Http
-@using Bog.Web.Api.Areas.HelpPage.Models
-@model HelpPageApiModel
+@model Bog.Web.Api.Areas.HelpPage.Models.HelpPageApiModel
 
 @{
-    var description = Model.ApiDescription;
-    ViewBag.Title = description.HttpMethod.Method + " " + description.RelativePath;
+    ApiDescription description = this.Model.ApiDescription;
+    this.ViewBag.Title = description.HttpMethod.Method + " " + description.RelativePath;
 }
 
 <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
@@ -12,11 +10,11 @@
     <section class="featured">
         <div class="content-wrapper">
             <p>
-                @Html.ActionLink("Help Page Home", "Index")
+                @(this.Html.ActionLink("Help Page Home", "Index"))
             </p>
         </div>
     </section>
     <section class="content-wrapper main-content clear-fix">
-        @Html.DisplayForModel()
+        @(this.Html.DisplayForModel())
     </section>
 </div>

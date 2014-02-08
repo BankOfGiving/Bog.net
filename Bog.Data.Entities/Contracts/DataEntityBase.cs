@@ -3,13 +3,17 @@
     using System;
 
     /// <summary>
-    /// The data entity base.
+    ///     The data entity base.
     /// </summary>
     public class DataEntityBase : IAuditableEntity
     {
-        public IAccount CreatedBy { get; set; }
+        #region Public Properties
+
         public DateTime CreatedAt { get; set; }
-        public IAccount ModifiedBy { get; set; }
+        public IAccount CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public IAccount ModifiedBy { get; set; }
+
+        #endregion
     }
 }

@@ -5,14 +5,14 @@
     using Bog.Data.Entities;
 
     /// <summary>
-    /// The OAuth membership configuration.
+    ///     The OAuth membership configuration.
     /// </summary>
     public class OAuthMembershipConfiguration : EntityTypeConfiguration<OAuthMembershipData>
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OAuthMembershipConfiguration"/> class.
+        ///     Initializes a new instance of the <see cref="OAuthMembershipConfiguration" /> class.
         /// </summary>
         public OAuthMembershipConfiguration()
         {

@@ -1,18 +1,20 @@
 ﻿namespace Bog.Internationalization
 {
     /// <summary>
-    /// A localization engine is needed to provide proper localization.
-    /// For now this will be used to store keys.
+    ///     A localization engine is needed to provide proper localization.
+    ///     For now this will be used to store keys.
     /// </summary>
     public static class Exceptions
     {
         /// <summary>
-        /// The donation exceptions.
+        ///     The donation exceptions.
         /// </summary>
         public static class DonationExceptions
         {
+            #region Public Properties
+
             /// <summary>
-            /// Gets the null instance.
+            ///     Gets the null instance.
             /// </summary>
             public static string RequiredInstance
             {
@@ -23,7 +25,7 @@
             }
 
             /// <summary>
-            /// Gets the title empty.
+            ///     Gets the title empty.
             /// </summary>
             public static string RequiredTitle
             {
@@ -32,15 +34,19 @@
                     return "Donation Title cannot be empty.";
                 }
             }
+
+            #endregion
         }
 
         /// <summary>
-        /// The donation exceptions.
+        ///     The donation exceptions.
         /// </summary>
         public static class InstanceExceptions
         {
+            #region Public Properties
+
             /// <summary>
-            /// Gets the null instance.
+            ///     Gets the null instance.
             /// </summary>
             public static string InvalidAddress
             {
@@ -49,6 +55,8 @@
                     return "At least one Instance is required.";
                 }
             }
+
+            #endregion
         }
     }
 }

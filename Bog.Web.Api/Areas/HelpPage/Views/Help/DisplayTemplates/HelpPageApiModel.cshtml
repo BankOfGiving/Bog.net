@@ -1,11 +1,8 @@
-@using System.Web.Http
 @using System.Web.Http.Description
-@using Bog.Web.Api.Areas.HelpPage.Models
-@using Bog.Web.Api.Areas.HelpPage.ModelDescriptions
-@model HelpPageApiModel
+@model Bog.Web.Api.Areas.HelpPage.Models.HelpPageApiModel
 
 @{
-    ApiDescription description = Model.ApiDescription;
+    ApiDescription description = this.Model.ApiDescription;
 }
 <h1>@description.HttpMethod.Method @description.RelativePath</h1>
 <div>
@@ -14,18 +11,18 @@
     <h2>Request Information</h2>
 
     <h3>URI Parameters</h3>
-    @Html.DisplayFor(m => m.UriParameters, "Parameters")
+    @(this.Html.DisplayFor(m => m.UriParameters, "Parameters"))
 
     <h3>Body Parameters</h3>
 
-    <p>@Model.RequestDocumentation</p>
+    <p>@(this.Model.RequestDocumentation)</p>
 
-    @if (Model.RequestModelDescription != null)
+    @if (this.Model.RequestModelDescription != null)
     {
-        @Html.DisplayFor(m => m.RequestModelDescription.ModelType, "ModelDescriptionLink", new { modelDescription = Model.RequestModelDescription })
-        if (Model.RequestBodyParameters != null)
+        @(this.Html.DisplayFor(m => m.RequestModelDescription.ModelType, "ModelDescriptionLink", new { modelDescription = this.Model.RequestModelDescription }))
+        if (this.Model.RequestBodyParameters != null)
         {
-            @Html.DisplayFor(m => m.RequestBodyParameters, "Parameters")
+            @(this.Html.DisplayFor(m => m.RequestBodyParameters, "Parameters"))
         }
     }
     else
@@ -33,10 +30,10 @@
         <p>None.</p>
     }
 
-    @if (Model.SampleRequests.Count > 0)
+    @if (this.Model.SampleRequests.Count > 0)
     {
         <h3>Request Formats</h3>
-        @Html.DisplayFor(m => m.SampleRequests, "Samples")
+        @(this.Html.DisplayFor(m => m.SampleRequests, "Samples"))
     }
 
     <h2>Response Information</h2>
@@ -45,12 +42,12 @@
 
     <p>@description.ResponseDescription.Documentation</p>
 
-    @if (Model.ResourceDescription != null)
+    @if (this.Model.ResourceDescription != null)
     {
-        @Html.DisplayFor(m => m.ResourceDescription.ModelType, "ModelDescriptionLink", new { modelDescription = Model.ResourceDescription })
-        if (Model.ResourceProperties != null)
+        @(this.Html.DisplayFor(m => m.ResourceDescription.ModelType, "ModelDescriptionLink", new { modelDescription = this.Model.ResourceDescription }))
+        if (this.Model.ResourceProperties != null)
         {
-            @Html.DisplayFor(m => m.ResourceProperties, "Parameters")
+            @(this.Html.DisplayFor(m => m.ResourceProperties, "Parameters"))
         }
     }
     else
@@ -58,10 +55,10 @@
         <p>None.</p>
     }
 
-    @if (Model.SampleResponses.Count > 0)
+    @if (this.Model.SampleResponses.Count > 0)
     {
         <h3>Response Formats</h3>
-        @Html.DisplayFor(m => m.SampleResponses, "Samples")
+        @(this.Html.DisplayFor(m => m.SampleResponses, "Samples"))
     }
 
 </div>

@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Data.Entity;
-    using System.Data.Entity.Core.Metadata.Edm;
+    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.ModelConfiguration.Conventions;
     using System.Linq;
     using System.Runtime.Serialization;
@@ -13,7 +13,7 @@
     using Bog.Data.EntityFramework.Configuration;
 
     /// <summary>
-    /// The entity framework data context.
+    ///     The entity framework data context.
     /// </summary>
     public class BogContext : DbContext
     {
@@ -52,6 +52,22 @@
 
         #endregion
 
+        #region Public Methods and Operators
+
+        /// <summary>
+        ///     The save changes.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="int" />.
+        /// </returns>
+        public override int SaveChanges()
+        {
+            this.ApplyRules();
+            return base.SaveChanges();
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -82,23 +98,17 @@
         }
 
         /// <summary>
-        /// The save changes.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        public override int SaveChanges()
-        {
-            this.ApplyRules();
-            return base.SaveChanges();
-        }
-
-        /// <summary>
-        /// The apply rules.
+        ///     The apply rules.
         /// </summary>
         private void ApplyRules()
         {
-            foreach (var entry in this.ChangeTracker.Entries().Where(e => e.Entity is IAuditableEntity && (e.State == EntityState.Added || e.State == EntityState.Modified)))
+            foreach (
+                DbEntityEntry entry in
+                    this.ChangeTracker.Entries()
+                        .Where(
+                            e =>
+                            e.Entity is IAuditableEntity
+                            && (e.State == EntityState.Added || e.State == EntityState.Modified)))
             {
                 IAuditableEntity auditLog = (IAuditableEntity)entry.Entity;
 
@@ -112,7 +122,6 @@
                 // TODO: Save to external audit log.
             }
         }
-
 
         #endregion
     }

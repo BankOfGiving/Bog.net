@@ -23,7 +23,7 @@
         // The deferred used on DOM ready
         readyList,
         // Support: IE9
-	// For `typeof xmlNode.method` instead of `xmlNode.method !== undefined`
+        // For `typeof xmlNode.method` instead of `xmlNode.method !== undefined`
         core_strundefined = typeof undefined,
         // Use the correct document accordingly with window argument (sandbox)
         location = window.location,
@@ -56,7 +56,7 @@
         // Used for splitting on whitespace
         core_rnotwhite = /\S+/g,
         // A simple way to check for HTML strings
-	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
+        // Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
 	// Strict HTML recognition (#11290: must start with <)
         rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
         // Match a standalone tag
@@ -914,19 +914,19 @@
             booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
             // Regular expressions
 
-	// Whitespace characters http://www.w3.org/TR/css3-selectors/#whitespace
+            // Whitespace characters http://www.w3.org/TR/css3-selectors/#whitespace
             whitespace = "[\\x20\\t\\r\\n\\f]",
             // http://www.w3.org/TR/css3-syntax/#characters
             characterEncoding = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",
             // Loosely modeled on CSS identifier characters
-	// An unquoted value should be a CSS identifier http://www.w3.org/TR/css3-selectors/#attribute-selectors
+            // An unquoted value should be a CSS identifier http://www.w3.org/TR/css3-selectors/#attribute-selectors
 	// Proper syntax: http://www.w3.org/TR/CSS21/syndata.html#value-def-identifier
             identifier = characterEncoding.replace("w", "w#"),
             // Acceptable operators http://www.w3.org/TR/selectors/#attribute-selectors
             attributes = "\\[" + whitespace + "*(" + characterEncoding + ")" + whitespace +
                 "*(?:([*^$|!~]?=)" + whitespace + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + identifier + ")|)|)" + whitespace + "*\\]",
             // Prefer arguments quoted,
-	//   then not containing pseudos/brackets,
+            //   then not containing pseudos/brackets,
 	//   then attribute selectors/non-parenthetical expressions,
 	//   then anything else
 	// These preferences are here to reduce the number of selectors
@@ -994,7 +994,7 @@
                         push_native.apply(target, slice.call(els));
                     } :
                     // Support: IE<9
-		// Otherwise append directly
+                    // Otherwise append directly
                     function(target, els) {
                         var j = target.length,
                             i = 0;
@@ -1641,7 +1641,7 @@
                     // IE 9's matchesSelector returns false on disconnected nodes
                     if (ret || support.disconnectedMatch ||
                         // As well, disconnected nodes are said to be in a document
-					// fragment in IE 9
+                        // fragment in IE 9
                         elem.document && elem.document.nodeType !== 11) {
                         return ret;
                     }
@@ -3332,7 +3332,7 @@
         set: function(owner, data, value) {
             var prop,
                 // There may be an unlock assigned to this node,
-			// if there is no entry for this "owner", create one inline
+                // if there is no entry for this "owner", create one inline
 			// and set the unlock as though an owner entry had always existed
                 unlock = this.key(owner),
                 cache = this.cache[unlock];
@@ -4196,7 +4196,7 @@
                 ret = isXML ?
                     undefined :
                     /* jshint eqeqeq: false */
-				// Temporarily disable this handler to check existence
+                    // Temporarily disable this handler to check existence
                     (jQuery.expr.attrHandle[name] = undefined) !=
                         getter(elem, name, isXML) ?
                         name.toLowerCase() :
@@ -5147,7 +5147,7 @@
             return !!winnow(
                 this,
                 // If this is a positional/relative selector, check membership in the returned set
-			// so $("p:first").is("p:last") won't return true for a doc with two "p".
+                // so $("p:first").is("p:last") won't return true for a doc with two "p".
                 typeof selector === "string" && rneedsContext.test(selector) ?
                     jQuery(selector) :
                     selector || [],
@@ -6017,7 +6017,7 @@
     });
     var curCSS, iframe,
         // swappable if display is none or starts with table except "table", "table-cell", or "table-caption"
-	// see here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
+        // see here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
         rdisplayswap = /^(none|table(?!-c[ea]).+)/,
         rmargin = /^margin/,
         rnumsplit = new RegExp("^(" + core_pnum + ")(.*)$", "i"),
@@ -6170,7 +6170,7 @@
 
     jQuery.extend({
         // Add in style property hooks for overriding the default
-	// behavior of getting and setting a style property
+        // behavior of getting and setting a style property
         cssHooks: {
             opacity: {
                 get: function(elem, computed) {
@@ -6304,7 +6304,7 @@
         var width, minWidth, maxWidth,
             computed = _computed || getStyles(elem),
             // Support: IE9
-		// getPropertyValue is only needed for .css('filter') in IE9, see #12537
+            // getPropertyValue is only needed for .css('filter') in IE9, see #12537
             ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
             style = elem.style;
 
@@ -6879,7 +6879,7 @@
 
                 self.html(selector ?
                     // If a selector was specified, locate the right elements in a dummy div
-				// Exclude scripts to avoid IE 'Permission Denied' errors
+                    // Exclude scripts to avoid IE 'Permission Denied' errors
                     jQuery("<div>").append(jQuery.parseHTML(responseText)).find(selector) :
                     // Otherwise use the full result
                     responseText);
@@ -7709,7 +7709,7 @@
             1223: 204
         },
         // Support: IE9
-	// We need to keep track of outbound xhr and abort them manually
+        // We need to keep track of outbound xhr and abort them manually
 	// because IE is not smart enough to do it all by itself
         xhrId = 0,
         xhrCallbacks = {};
@@ -7776,7 +7776,7 @@
                                         xhrSuccessStatus[xhr.status] || xhr.status,
                                         xhr.statusText,
                                         // Support: IE9
-									// #11426: When requesting binary data, IE9 will throw an exception
+                                        // #11426: When requesting binary data, IE9 will throw an exception
 									// on any attempt to access responseText
                                         typeof xhr.responseText === "string" ? {
                                             text: xhr.responseText
@@ -7935,7 +7935,7 @@
                 stop: function(gotoEnd) {
                     var index = 0,
                         // if we are going to the end, we want to run all the tweens
-					// otherwise we skip this part
+                        // otherwise we skip this part
                         length = gotoEnd ? animation.tweens.length : 0;
                     if (stopped) {
                         return this;

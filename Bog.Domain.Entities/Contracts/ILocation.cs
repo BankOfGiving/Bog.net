@@ -2,6 +2,8 @@
 {
     public interface ILocation
     {
+        #region Public Properties
+
         /// <summary>
         ///     Gets or sets the latitude.
         /// </summary>
@@ -11,5 +13,7 @@
         ///     Gets or sets the longitude.
         /// </summary>
         decimal Longitude { get; set; }
+
+        #endregion
     }
 }

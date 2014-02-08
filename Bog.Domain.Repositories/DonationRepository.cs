@@ -6,18 +6,23 @@
     using Bog.Data.Repositories;
     using Bog.Domain.Entities;
     using Bog.Domain.Repositories.Contracts;
-    using Bog.Enumerations;
     using Bog.Logging;
 
     /// <summary>
-    /// The donation repository.
+    ///     The donation repository.
     /// </summary>
     public class DonationRepository : IDonationRepository
     {
+        #region Fields
+
         /// <summary>
-        /// The donation data.
+        ///     The donation data.
         /// </summary>
         private readonly IDataWorker _worker;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DonationRepository"/> class.
@@ -29,62 +34,21 @@
             this._worker = worker;
         }
 
-        #region Add/Update
-
-        /// <summary>
-        /// The save.
-        /// </summary>
-        /// <param name="donation">
-        /// The donation.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public Donation Save(Donation donation)
-        {
-            try
-            {
-                if (donation.DonationId.Equals(0))
-                {
-                    return donation; //this.donationData.Add(donation);
-                }
-
-                return donation;  // this.donationData.Save(donation);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-                throw;
-            }
-        }
-
         #endregion
 
-        #region Get Collection
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The get donation headers only with no instances instances.
+        ///     The get donation headers only with no instances instances.
         /// </summary>
         /// <returns>
-        /// The <see cref="IEnumerable{T}"/>.
+        ///     The <see cref="IEnumerable{T}" />.
         /// </returns>
         public IEnumerable<Donation> Get()
         {
             return this._worker.Donations.GetAll();
+
             // return this.donationData.Get(InstanceRange.None);
-        }
-
-        /// <summary>
-        /// The get donations including instances.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IEnumerable{T}"/>.
-        /// </returns>
-        public IEnumerable<Donation> GetWithFutureInstances()
-        {
-
-            return this._worker.Donations.GetAll();
-            //return this._worker.Donations.Get(InstanceRange.Future);
         }
 
         /////// <summary>
@@ -133,6 +97,48 @@
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     The get donations including instances.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="IEnumerable{T}" />.
+        /// </returns>
+        public IEnumerable<Donation> GetWithFutureInstances()
+        {
+            return this._worker.Donations.GetAll();
+
+            // return this._worker.Donations.Get(InstanceRange.Future);
+        }
+
+        /// <summary>
+        /// The save.
+        /// </summary>
+        /// <param name="donation">
+        /// The donation.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public Donation Save(Donation donation)
+        {
+            try
+            {
+                if (donation.DonationId.Equals(0))
+                {
+                    return donation; // this.donationData.Add(donation);
+                }
+
+                return donation; // this.donationData.Save(donation);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                throw;
+            }
+        }
+
+        #endregion
+
         /////// <summary>
         /////// The get with future instances.
         /////// </summary>
@@ -160,7 +166,5 @@
         ////{
         ////    throw new NotImplementedException();
         ////}
-        
-        #endregion
     }
 }

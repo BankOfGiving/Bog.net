@@ -2,10 +2,13 @@
 {
     public class UserInfoViewModel
     {
-        public string UserName { get; set; }
+        #region Public Properties
 
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
+        public string UserName { get; set; }
+
+        #endregion
     }
 }

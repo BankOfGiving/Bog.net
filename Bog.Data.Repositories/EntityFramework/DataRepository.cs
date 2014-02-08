@@ -4,30 +4,27 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Diagnostics;
     using System.Linq;
 
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
 
     using Bog.Data.Entities.Contracts;
     using Bog.Data.Repositories.Contracts;
 
-    using Ninject.Infrastructure.Language;
-
     /// <summary>
     /// The generic repository.
     /// </summary>
-    /// <typeparam name="T">
-    /// The type of entity to be acted upon.
+    /// <typeparam name="TData">
+    /// </typeparam>
+    /// <typeparam name="TModel">
     /// </typeparam>
     public class DataRepository<TData, TModel> : IRepository<TData, TModel>
-        where TData : DataEntityBase
-        where TModel : class
+        where TData : DataEntityBase where TModel : class
     {
         #region Constructors and Destructors
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="DataRepository{TData,TModel}"/> class. 
         /// Initializes a new instance of the <see cref="DataRepository{T}"/> class.
         /// </summary>
         /// <param name="context">
@@ -70,7 +67,7 @@
         /// </param>
         public void Add(TModel entity)
         {
-            var dataEntity = Mapper.Map<TModel, TData>(entity);
+            TData dataEntity = Mapper.Map<TModel, TData>(entity);
 
             DbEntityEntry entry = this.Context.Entry(dataEntity);
             if (entry.State != EntityState.Detached)
@@ -91,7 +88,7 @@
         /// </param>
         public void Delete(TModel entity)
         {
-            var dataEntity = Mapper.Map<TModel, TData>(entity);
+            TData dataEntity = Mapper.Map<TModel, TData>(entity);
 
             this.Delete(dataEntity);
         }
@@ -119,7 +116,7 @@
         /// </param>
         public void Delete(int id)
         {
-            var entity = this.GetById(id);
+            TModel entity = this.GetById(id);
             if (entity != null)
             {
                 this.Delete(entity);
@@ -134,7 +131,7 @@
         /// </param>
         public void Detach(TModel entity)
         {
-            var dataEntity = Mapper.Map<TModel, TData>(entity);
+            TData dataEntity = Mapper.Map<TModel, TData>(entity);
 
             DbEntityEntry entry = this.Context.Entry(dataEntity);
 
@@ -149,8 +146,9 @@
         /// </returns>
         public virtual IEnumerable<TModel> GetAll()
         {
-            var collection = this.DbSet;
+            DbSet<TData> collection = this.DbSet;
             return Mapper.Map<IEnumerable<TData>, IEnumerable<TModel>>(collection);
+
             // return this.DbSet.Project().To<TModel>();
         }
 
@@ -165,7 +163,7 @@
         /// </returns>
         public TModel GetById(int id)
         {
-            var dataEntity = this.DbSet.Find(id);
+            TData dataEntity = this.DbSet.Find(id);
             return Mapper.Map<TData, TModel>(dataEntity);
         }
 
@@ -177,7 +175,7 @@
         /// </param>
         public void Update(TModel entity)
         {
-            var dataEntity = Mapper.Map<TModel, TData>(entity);
+            TData dataEntity = Mapper.Map<TModel, TData>(entity);
 
             DbEntityEntry entry = this.Context.Entry(dataEntity);
             if (entry.State != EntityState.Detached)

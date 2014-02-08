@@ -5,14 +5,14 @@
     using Bog.Data.Entities;
 
     /// <summary>
-    /// The user configuration.
+    ///     The user configuration.
     /// </summary>
     public class UserConfiguration : EntityTypeConfiguration<UserData>
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserConfiguration"/> class.
+        ///     Initializes a new instance of the <see cref="UserConfiguration" /> class.
         /// </summary>
         public UserConfiguration()
         {

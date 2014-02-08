@@ -1,14 +1,14 @@
 ﻿namespace Bog.Domain.Entities.Contracts
 {
     /// <summary>
-    /// The identifiable entity.
+    ///     The identifiable entity.
     /// </summary>
     public interface IIdentifiableEntity
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the entity id.
+        ///     Gets or sets the entity id.
         /// </summary>
         int EntityId { get; set; }
 

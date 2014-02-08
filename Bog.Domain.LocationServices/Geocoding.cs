@@ -4,18 +4,22 @@
 
     using Bog.Domain.Entities;
 
-    using Location = GoogleMapsApi.Entities.Common.Location;
-
     /// <summary>
-    /// The service.
+    ///     The service.
     /// </summary>
     public class Geocoding
     {
+        #region Fields
+
         /// <summary>
-        /// The base uri.
+        ///     The base uri.
         /// </summary>
-        /// TODO: Move Api base uri to config file.  
+        /// TODO: Move Api base uri to config file.
         private readonly Uri BaseUri = new Uri("http://maps.googleapis.com/maps/api/geocode/json?sensor=false");
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// The get geo location.
@@ -24,9 +28,9 @@
         /// The address.
         /// </param>
         /// <returns>
-        /// The <see cref="Location"/>.
+        /// The <see cref="GoogleMapsApi.Entities.Common.Location"/>.
         /// </returns>
-        public Domain.Entities.Location Get(Address address)
+        public Location Get(Address address)
         {
             ////GeocodingRequest geocodeRequest = new GeocodingRequest()
             ////{
@@ -34,8 +38,7 @@
             ////};
             ////GoogleMaps geocodingEngine = new GoogleMaps();
             ////GeocodingResponse geocode = geocodingEngine. .GetGeocode(geocodeRequest);
-
-            return new Domain.Entities.Location();
+            return new Location();
         }
 
         /// <summary>
@@ -47,15 +50,18 @@
         /// <returns>
         /// The <see cref="Address"/>.
         /// </returns>
-        public Address Get(Domain.Entities.Location location)
+        public Address Get(Location location)
         {
             ////string requestUri = string.Format(this.BaseUri, string.Format("&lat={0}&lng=");
             ////HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
 
             ////HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
             return new Address();
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// The call.
@@ -66,5 +72,7 @@
         private void Call(Uri requestUri)
         {
         }
+
+        #endregion
     }
 }

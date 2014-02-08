@@ -8,10 +8,12 @@
     using Bog.Enumerations;
 
     /// <summary>
-    /// The DonationDataRepository interface.
+    ///     The DonationDataRepository interface.
     /// </summary>
     public interface IDonationDataRepository : IDisposable
     {
+        #region Public Methods and Operators
+
         /// <summary>
         /// The save.
         /// </summary>
@@ -55,5 +57,7 @@
         /// The <see cref="Donation"/>.
         /// </returns>
         Donation Save(Donation donation);
+
+        #endregion
     }
 }

@@ -6,8 +6,12 @@
     /// <summary>
     /// The Repository interface.
     /// </summary>
-    /// <typeparam name="TData">Type of data entity.</typeparam>
-    /// <typeparam name="TModel">Type of domain model.</typeparam>
+    /// <typeparam name="TData">
+    /// Type of data entity.
+    /// </typeparam>
+    /// <typeparam name="TModel">
+    /// Type of domain model.
+    /// </typeparam>
     public interface IRepository<TData, TModel>
     {
         #region Public Methods and Operators
@@ -45,10 +49,10 @@
         void Detach(TModel entity);
 
         /// <summary>
-        /// The get all.
+        ///     The get all.
         /// </summary>
         /// <returns>
-        /// The <see cref="IQueryable"/>.
+        ///     The <see cref="IQueryable" />.
         /// </returns>
         IEnumerable<TModel> GetAll();
 

@@ -7,10 +7,12 @@
     using Bog.Domain.Entities;
 
     /// <summary>
-    /// The DataWorker interface.
+    ///     The DataWorker interface.
     /// </summary>
     public interface IDataWorker : IDisposable
     {
+        #region Public Properties
+
         /// <summary>
         ///     Gets the donations.
         /// </summary>
@@ -26,6 +28,10 @@
         /// </summary>
         IRepository<TagData, Tag> Tags { get; }
 
+        #endregion
+
+        #region Public Methods and Operators
+
         /// <summary>
         ///     The dispose.
         /// </summary>
@@ -35,5 +41,7 @@
         ///     The save changes.
         /// </summary>
         void SaveChanges();
+
+        #endregion
     }
 }

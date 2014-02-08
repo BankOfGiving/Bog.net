@@ -41,10 +41,7 @@
 
             config.EnableCors();
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute("DefaultApi", "{controller}/{id}", new { id = RouteParameter.Optional });
         }
 
         #endregion
@@ -52,7 +49,8 @@
         /// <summary>
         /// The exclude base contract resolver.
         /// </summary>
-        /// <typeparam name="T">The type of entity to analyze.
+        /// <typeparam name="T">
+        /// The type of entity to analyze.
         /// </typeparam>
         public class ExcludeBaseContractResolver<T> : DefaultContractResolver
             where T : class
@@ -60,7 +58,7 @@
             #region Static Fields
 
             /// <summary>
-            /// The instance.
+            ///     The instance.
             /// </summary>
             public static readonly ExcludeBaseContractResolver<T> Instance = new ExcludeBaseContractResolver<T>();
 

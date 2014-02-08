@@ -6,25 +6,35 @@
     using System.IO;
 
     /// <summary>
-    /// The bog composition container.
+    ///     The bog composition container.
     /// </summary>
     public class BogCompositionContainer
     {
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="BogCompositionContainer"/> class.
+        ///     Initializes a new instance of the <see cref="BogCompositionContainer" /> class.
         /// </summary>
         public BogCompositionContainer()
         {
             this.Compose();
         }
 
+        #endregion
+
+        #region Properties
+
         /// <summary>
-        /// Gets or sets the container.
+        ///     Gets or sets the container.
         /// </summary>
         private CompositionContainer Container { get; set; }
 
+        #endregion
+
+        #region Public Methods and Operators
+
         /// <summary>
-        /// The compose.
+        ///     The compose.
         /// </summary>
         public void Compose()
         {
@@ -38,16 +48,18 @@
         }
 
         /// <summary>
-        /// The get exported values.
+        ///     The get exported values.
         /// </summary>
         /// <typeparam name="T">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="IEnumerable{T}"/>.
+        ///     The <see cref="IEnumerable{T}" />.
         /// </returns>
         public IEnumerable<T> GetExportedValues<T>()
         {
             return this.Container.GetExportedValues<T>();
         }
+
+        #endregion
     }
 }

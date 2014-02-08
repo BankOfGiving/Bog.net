@@ -10,7 +10,7 @@
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserData"/> class.
+        ///     Initializes a new instance of the <see cref="UserData" /> class.
         /// </summary>
         public UserData()
         {
@@ -22,27 +22,27 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the first name.
+        ///     Gets or sets the first name.
         /// </summary>
         public string FirstName { get; set; }
 
         /// <summary>
-        /// Gets or sets the id.
+        ///     Gets or sets the id.
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the last name.
+        ///     Gets or sets the last name.
         /// </summary>
         public string LastName { get; set; }
 
         /// <summary>
-        /// Gets or sets the roles.
+        ///     Gets or sets the roles.
         /// </summary>
         public ICollection<RoleData> Roles { get; set; }
 
         /// <summary>
-        /// Gets or sets the username.
+        ///     Gets or sets the username.
         /// </summary>
         public string Username { get; set; }
 

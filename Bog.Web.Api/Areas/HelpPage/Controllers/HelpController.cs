@@ -1,17 +1,24 @@
-using System;
-using System.Web.Http;
-using System.Web.Mvc;
-using Bog.Web.Api.Areas.HelpPage.ModelDescriptions;
-using Bog.Web.Api.Areas.HelpPage.Models;
-
 namespace Bog.Web.Api.Areas.HelpPage.Controllers
 {
+    using System;
+    using System.Web.Http;
+    using System.Web.Mvc;
+
+    using Bog.Web.Api.Areas.HelpPage.ModelDescriptions;
+    using Bog.Web.Api.Areas.HelpPage.Models;
+
     /// <summary>
-    /// The controller that will handle requests for the help page.
+    ///     The controller that will handle requests for the help page.
     /// </summary>
     public class HelpController : Controller
     {
+        #region Constants
+
         private const string ErrorViewName = "Error";
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public HelpController()
             : this(GlobalConfiguration.Configuration)
@@ -20,36 +27,44 @@ namespace Bog.Web.Api.Areas.HelpPage.Controllers
 
         public HelpController(HttpConfiguration config)
         {
-            Configuration = config;
+            this.Configuration = config;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public HttpConfiguration Configuration { get; private set; }
 
-        public ActionResult Index()
-        {
-            ViewBag.DocumentationProvider = Configuration.Services.GetDocumentationProvider();
-            return View(Configuration.Services.GetApiExplorer().ApiDescriptions);
-        }
+        #endregion
+
+        #region Public Methods and Operators
 
         public ActionResult Api(string apiId)
         {
-            if (!String.IsNullOrEmpty(apiId))
+            if (!string.IsNullOrEmpty(apiId))
             {
-                HelpPageApiModel apiModel = Configuration.GetHelpPageApiModel(apiId);
+                HelpPageApiModel apiModel = this.Configuration.GetHelpPageApiModel(apiId);
                 if (apiModel != null)
                 {
                     return View(apiModel);
                 }
             }
 
-            return View(ErrorViewName);
+            return this.View(ErrorViewName);
+        }
+
+        public ActionResult Index()
+        {
+            this.ViewBag.DocumentationProvider = this.Configuration.Services.GetDocumentationProvider();
+            return this.View(this.Configuration.Services.GetApiExplorer().ApiDescriptions);
         }
 
         public ActionResult ResourceModel(string modelName)
         {
-            if (!String.IsNullOrEmpty(modelName))
+            if (!string.IsNullOrEmpty(modelName))
             {
-                ModelDescriptionGenerator modelDescriptionGenerator = Configuration.GetModelDescriptionGenerator();
+                ModelDescriptionGenerator modelDescriptionGenerator = this.Configuration.GetModelDescriptionGenerator();
                 ModelDescription modelDescription;
                 if (modelDescriptionGenerator.GeneratedModels.TryGetValue(modelName, out modelDescription))
                 {
@@ -57,7 +72,9 @@ namespace Bog.Web.Api.Areas.HelpPage.Controllers
                 }
             }
 
-            return View(ErrorViewName);
+            return this.View(ErrorViewName);
         }
+
+        #endregion
     }
 }

@@ -3,10 +3,22 @@
     using System;
 
     /// <summary>
-    /// The address.
+    ///     The address.
     /// </summary>
     public class Address
     {
+        #region Public Properties
+
+        /// <summary>
+        ///     Gets or sets the city.
+        /// </summary>
+        public string City { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the country.
+        /// </summary>
+        public string Country { get; set; }
+
         /// <summary>
         ///     Gets or sets the postal code.
         /// </summary>
@@ -27,19 +39,15 @@
         /// </summary>
         public string Street2 { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the city.
-        /// </summary>
-        public string City { get; set; }
+        #endregion
 
-        /// <summary>
-        ///     Gets or sets the country.
-        /// </summary>
-        public string Country { get; set; }
+        #region Methods
 
         private bool IsAddressValid()
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

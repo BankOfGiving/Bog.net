@@ -7,15 +7,17 @@
     using Bog.Enumerations;
 
     /// <summary>
-    /// The DonationController interface.
+    ///     The DonationController interface.
     /// </summary>
     public interface IDonationController
     {
+        #region Public Methods and Operators
+
         /// <summary>
-        /// The get.
+        ///     The get.
         /// </summary>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         [Route("")]
         HttpResponseMessage Get();
@@ -58,5 +60,7 @@
         /// </returns>
         [Route("")]
         HttpResponseMessage Post([FromBody] Donation donation);
+
+        #endregion
     }
 }

@@ -4,12 +4,14 @@
 
     public class ManageInfoViewModel
     {
-        public string LocalLoginProvider { get; set; }
-
-        public string UserName { get; set; }
-
-        public IEnumerable<UserLoginInfoViewModel> Logins { get; set; }
+        #region Public Properties
 
         public IEnumerable<ExternalLoginViewModel> ExternalLoginProviders { get; set; }
+        public string LocalLoginProvider { get; set; }
+
+        public IEnumerable<UserLoginInfoViewModel> Logins { get; set; }
+        public string UserName { get; set; }
+
+        #endregion
     }
 }

@@ -6,14 +6,14 @@
     using Bog.Data.Entities;
 
     /// <summary>
-    /// The membership configuration.
+    ///     The membership configuration.
     /// </summary>
     public class MembershipConfiguration : EntityTypeConfiguration<MembershipData>
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MembershipConfiguration"/> class.
+        ///     Initializes a new instance of the <see cref="MembershipConfiguration" /> class.
         /// </summary>
         public MembershipConfiguration()
         {

@@ -14,15 +14,21 @@
     using Bog.Web.Api.Controllers.Contracts;
 
     /// <summary>
-    /// The donation controller.
+    ///     The donation controller.
     /// </summary>
     [RoutePrefix("donation")]
     public class DonationController : ApiController, IDonationController
     {
+        #region Fields
+
         /// <summary>
-        /// The repo.
+        ///     The repo.
         /// </summary>
         private readonly IDonationRepository repo;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DonationController"/> class.
@@ -35,11 +41,15 @@
             this.repo = repo;
         }
 
+        #endregion
+
+        #region Public Methods and Operators
+
         /// <summary>
-        /// The get.
+        ///     The get.
         /// </summary>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         [Route("")]
         [EnableCors("*", null, null)]
@@ -47,7 +57,7 @@
         {
             IEnumerable<Donation> donations = this.repo.Get();
 
-            var response = this.Request.CreateResponse(HttpStatusCode.OK, donations);
+            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.OK, donations);
 
             return response;
         }
@@ -97,7 +107,9 @@
             }
 
             Donation donation = this.repo.Get(0);
-            return donation != null ? this.Request.CreateResponse(HttpStatusCode.OK, donation) : this.Request.CreateResponse(HttpStatusCode.NotFound);
+            return donation != null
+                       ? this.Request.CreateResponse(HttpStatusCode.OK, donation)
+                       : this.Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
         /// <summary>
@@ -114,19 +126,21 @@
         {
             if (donation == null)
             {
-                return new HttpResponseMessage(HttpStatusCode.NoContent);  // this.Request.CreateErrorResponse(, ex);
+                return new HttpResponseMessage(HttpStatusCode.NoContent); // this.Request.CreateErrorResponse(, ex);
             }
 
             try
             {
-                var processedDonation = this.repo.Save(donation);
+                Donation processedDonation = this.repo.Save(donation);
                 return this.Request.CreateResponse(HttpStatusCode.Created, processedDonation);
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-                return new HttpResponseMessage(HttpStatusCode.NotAcceptable);  // this.Request.CreateErrorResponse(, ex);
+                return new HttpResponseMessage(HttpStatusCode.NotAcceptable); // this.Request.CreateErrorResponse(, ex);
             }
         }
+
+        #endregion
     }
 }

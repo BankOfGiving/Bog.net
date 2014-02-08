@@ -3,17 +3,17 @@
     using System.Web.Mvc;
 
     /// <summary>
-    /// The home controller.
+    ///     The home controller.
     /// </summary>
     public class HomeController : Controller
     {
         #region Public Methods and Operators
 
         /// <summary>
-        /// The index.
+        ///     The index.
         /// </summary>
         /// <returns>
-        /// The <see cref="ActionResult"/>.
+        ///     The <see cref="ActionResult" />.
         /// </returns>
         public ActionResult Index()
         {

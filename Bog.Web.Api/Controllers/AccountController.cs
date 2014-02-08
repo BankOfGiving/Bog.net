@@ -20,7 +20,7 @@
     using Microsoft.Owin.Security.OAuth;
 
     /// <summary>
-    /// The account controller.
+    ///     The account controller.
     /// </summary>
     [Authorize]
     [RoutePrefix("api/Account")]
@@ -29,7 +29,7 @@
         #region Constants
 
         /// <summary>
-        /// The local login provider.
+        ///     The local login provider.
         /// </summary>
         private const string LocalLoginProvider = "Local";
 
@@ -38,7 +38,7 @@
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        ///     Initializes a new instance of the <see cref="AccountController" /> class.
         /// </summary>
         public AccountController()
             : this(Startup.UserManagerFactory(), Startup.OAuthOptions.AccessTokenFormat)
@@ -67,12 +67,12 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets the access token format.
+        ///     Gets the access token format.
         /// </summary>
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         /// <summary>
-        /// Gets the user manager.
+        ///     Gets the user manager.
         /// </summary>
         public UserManager<IdentityUser> UserManager { get; private set; }
 
@@ -81,7 +81,7 @@
         #region Properties
 
         /// <summary>
-        /// Gets the authentication.
+        ///     Gets the authentication.
         /// </summary>
         private IAuthenticationManager Authentication
         {
@@ -485,14 +485,14 @@
         #endregion
 
         /// <summary>
-        /// The random Oauth state generator.
+        ///     The random Oauth state generator.
         /// </summary>
         private static class RandomOAuthStateGenerator
         {
             #region Static Fields
 
             /// <summary>
-            /// The random number generator.
+            ///     The random number generator.
             /// </summary>
             private static readonly RandomNumberGenerator _random = new RNGCryptoServiceProvider();
 
@@ -529,24 +529,24 @@
         }
 
         /// <summary>
-        /// The external login data.
+        ///     The external login data.
         /// </summary>
         private class ExternalLoginData
         {
             #region Public Properties
 
             /// <summary>
-            /// Gets or sets the login provider.
+            ///     Gets or sets the login provider.
             /// </summary>
             public string LoginProvider { get; set; }
 
             /// <summary>
-            /// Gets or sets the provider key.
+            ///     Gets or sets the provider key.
             /// </summary>
             public string ProviderKey { get; set; }
 
             /// <summary>
-            /// Gets or sets the user name.
+            ///     Gets or sets the user name.
             /// </summary>
             public string UserName { get; set; }
 
@@ -592,10 +592,10 @@
             }
 
             /// <summary>
-            /// The get claims.
+            ///     The get claims.
             /// </summary>
             /// <returns>
-            /// The <see cref="IEnumerable{T}"/>.
+            ///     The <see cref="IEnumerable{T}" />.
             /// </returns>
             public IEnumerable<Claim> GetClaims()
             {

@@ -9,18 +9,24 @@
     using Ninject.Web.Common;
 
     /// <summary>
-    /// IoC bindings.
+    ///     IoC bindings.
     /// </summary>
     [Export(typeof(IServiceBindings))]
     public class ServiceBindings : IServiceBindings
     {
+        #region Public Methods and Operators
+
         /// <summary>
         /// Load your modules or register your services here!
         /// </summary>
-        /// <param name="kernel">The kernel.</param>
+        /// <param name="kernel">
+        /// The kernel.
+        /// </param>
         public void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IDonationController>().To<DonationController>().InRequestScope();
         }
+
+        #endregion
     }
 }
