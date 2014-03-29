@@ -1,19 +1,22 @@
+@using System.Web.Http
 @using System.Web.Http.Controllers
 @using System.Web.Http.Description
-@model System.Collections.ObjectModel.Collection<ApiDescription>
+@using System.Collections.ObjectModel
+@using Bog.Web.Api.Areas.HelpPage.Models
+@model Collection<ApiDescription>
 
 @{
-    this.ViewBag.Title = "ASP.NET Web API Help Page";
+    ViewBag.Title = "ASP.NET Web API Help Page";
 
     // Group APIs by controller
-    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = this.Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
 }
 
 <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
 <header class="help-page">
     <div class="content-wrapper">
         <div class="float-left">
-            <h1>@(this.ViewBag.Title)</h1>
+            <h1>@ViewBag.Title</h1>
         </div>
     </div>
 </header>
@@ -27,9 +30,9 @@
         </div>
     </section>
     <section class="content-wrapper main-content clear-fix">
-        @foreach (IGrouping<HttpControllerDescriptor, ApiDescription> group in apiGroups)
+        @foreach (var group in apiGroups)
         {
-            @(this.Html.DisplayFor(m => group, "ApiGroup"))
+            @Html.DisplayFor(m => group, "ApiGroup")
         }
     </section>
 </div>

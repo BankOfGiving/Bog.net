@@ -1,19 +1,14 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
 namespace Bog.Web.Api.Areas.HelpPage.ModelDescriptions
 {
-    using System.Collections.ObjectModel;
-
     public class ParameterDescription
     {
-        #region Constructors and Destructors
-
         public ParameterDescription()
         {
-            this.Annotations = new Collection<ParameterAnnotation>();
+            Annotations = new Collection<ParameterAnnotation>();
         }
-
-        #endregion
-
-        #region Public Properties
 
         public Collection<ParameterAnnotation> Annotations { get; private set; }
 
@@ -22,7 +17,5 @@ namespace Bog.Web.Api.Areas.HelpPage.ModelDescriptions
         public string Name { get; set; }
 
         public ModelDescription TypeDescription { get; set; }
-
-        #endregion
     }
 }

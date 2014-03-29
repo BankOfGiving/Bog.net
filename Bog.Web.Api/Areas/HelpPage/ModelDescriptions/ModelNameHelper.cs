@@ -1,19 +1,17 @@
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+
 namespace Bog.Web.Api.Areas.HelpPage.ModelDescriptions
 {
-    using System;
-    using System.Globalization;
-    using System.Linq;
-    using System.Reflection;
-
     internal static class ModelNameHelper
     {
         // Modify this to provide custom model name mapping.
-        #region Public Methods and Operators
-
         public static string GetModelName(Type type)
         {
             ModelNameAttribute modelNameAttribute = type.GetCustomAttribute<ModelNameAttribute>();
-            if (modelNameAttribute != null && !string.IsNullOrEmpty(modelNameAttribute.Name))
+            if (modelNameAttribute != null && !String.IsNullOrEmpty(modelNameAttribute.Name))
             {
                 return modelNameAttribute.Name;
             }
@@ -29,16 +27,10 @@ namespace Bog.Web.Api.Areas.HelpPage.ModelDescriptions
                 // Trim the generic parameter counts from the name
                 genericTypeName = genericTypeName.Substring(0, genericTypeName.IndexOf('`'));
                 string[] argumentTypeNames = genericArguments.Select(t => GetModelName(t)).ToArray();
-                modelName = string.Format(
-                    CultureInfo.InvariantCulture, 
-                    "{0}Of{1}", 
-                    genericTypeName, 
-                    string.Join("And", argumentTypeNames));
+                modelName = String.Format(CultureInfo.InvariantCulture, "{0}Of{1}", genericTypeName, String.Join("And", argumentTypeNames));
             }
 
             return modelName;
         }
-
-        #endregion
     }
 }

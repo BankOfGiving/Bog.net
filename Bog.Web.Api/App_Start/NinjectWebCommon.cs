@@ -1,6 +1,6 @@
 using Bog.Web.Api.App_Start;
 
-using WebActivator;
+using WebActivatorEx;
 
 [assembly: PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]

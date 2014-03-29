@@ -1,9 +1,10 @@
-@model Bog.Web.Api.Areas.HelpPage.InvalidSample
+@using Bog.Web.Api.Areas.HelpPage
+@model InvalidSample
 
 @if (HttpContext.Current.IsDebuggingEnabled)
 {
     <div class="warning-message-container">
-        <p>@(this.Model.ErrorMessage)</p>
+        <p>@Model.ErrorMessage</p>
     </div>
 }
 else
