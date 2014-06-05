@@ -51,9 +51,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoogleMapsApi, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GoogleMapsApi.0.30.0.0\lib\net45\GoogleMapsApi.dll</HintPath>
+    <Reference Include="GoogleMapsApi">
+      <HintPath>..\packages\GoogleMapsApi.0.40.0.0\lib\net45\GoogleMapsApi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

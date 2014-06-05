@@ -1,88 +1,62 @@
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Web.Http.Controllers;
+using System.Web.Http.Description;
+using System.Xml.XPath;
+using Bog.Web.Api.Areas.HelpPage.ModelDescriptions;
+
 namespace Bog.Web.Api.Areas.HelpPage
 {
-    using System;
-    using System.Globalization;
-    using System.Linq;
-    using System.Reflection;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Description;
-    using System.Xml.XPath;
-
-    using Bog.Web.Api.Areas.HelpPage.ModelDescriptions;
-
     /// <summary>
-    ///     A custom <see cref="IDocumentationProvider" /> that reads the API documentation from an XML documentation file.
+    /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
     /// </summary>
     public class XmlDocumentationProvider : IDocumentationProvider, IModelDocumentationProvider
     {
-        #region Constants
-
-        private const string FieldExpression = "/doc/members/member[@name='F:{0}']";
-
-        private const string MethodExpression = "/doc/members/member[@name='M:{0}']";
-
-        private const string ParameterExpression = "param[@name='{0}']";
-
-        private const string PropertyExpression = "/doc/members/member[@name='P:{0}']";
-
+        private XPathNavigator _documentNavigator;
         private const string TypeExpression = "/doc/members/member[@name='T:{0}']";
-
-        #endregion
-
-        #region Fields
-
-        private readonly XPathNavigator _documentNavigator;
-
-        #endregion
-
-        #region Constructors and Destructors
+        private const string MethodExpression = "/doc/members/member[@name='M:{0}']";
+        private const string PropertyExpression = "/doc/members/member[@name='P:{0}']";
+        private const string FieldExpression = "/doc/members/member[@name='F:{0}']";
+        private const string ParameterExpression = "param[@name='{0}']";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlDocumentationProvider"/> class.
         /// </summary>
-        /// <param name="documentPath">
-        /// The physical path to XML document.
-        /// </param>
+        /// <param name="documentPath">The physical path to XML document.</param>
         public XmlDocumentationProvider(string documentPath)
         {
             if (documentPath == null)
             {
                 throw new ArgumentNullException("documentPath");
             }
-
             XPathDocument xpath = new XPathDocument(documentPath);
-            this._documentNavigator = xpath.CreateNavigator();
+            _documentNavigator = xpath.CreateNavigator();
         }
-
-        #endregion
-
-        #region Public Methods and Operators
 
         public string GetDocumentation(HttpControllerDescriptor controllerDescriptor)
         {
-            XPathNavigator typeNode = this.GetTypeNode(controllerDescriptor.ControllerType);
+            XPathNavigator typeNode = GetTypeNode(controllerDescriptor.ControllerType);
             return GetTagValue(typeNode, "summary");
         }
 
         public virtual string GetDocumentation(HttpActionDescriptor actionDescriptor)
         {
-            XPathNavigator methodNode = this.GetMethodNode(actionDescriptor);
+            XPathNavigator methodNode = GetMethodNode(actionDescriptor);
             return GetTagValue(methodNode, "summary");
         }
 
         public virtual string GetDocumentation(HttpParameterDescriptor parameterDescriptor)
         {
-            ReflectedHttpParameterDescriptor reflectedParameterDescriptor =
-                parameterDescriptor as ReflectedHttpParameterDescriptor;
+            ReflectedHttpParameterDescriptor reflectedParameterDescriptor = parameterDescriptor as ReflectedHttpParameterDescriptor;
             if (reflectedParameterDescriptor != null)
             {
-                XPathNavigator methodNode = this.GetMethodNode(reflectedParameterDescriptor.ActionDescriptor);
+                XPathNavigator methodNode = GetMethodNode(reflectedParameterDescriptor.ActionDescriptor);
                 if (methodNode != null)
                 {
                     string parameterName = reflectedParameterDescriptor.ParameterInfo.Name;
-                    XPathNavigator parameterNode =
-                        methodNode.SelectSingleNode(
-                            string.Format(CultureInfo.InvariantCulture, ParameterExpression, parameterName));
+                    XPathNavigator parameterNode = methodNode.SelectSingleNode(String.Format(CultureInfo.InvariantCulture, ParameterExpression, parameterName));
                     if (parameterNode != null)
                     {
                         return parameterNode.Value.Trim();
@@ -93,47 +67,47 @@ namespace Bog.Web.Api.Areas.HelpPage
             return null;
         }
 
+        public string GetResponseDocumentation(HttpActionDescriptor actionDescriptor)
+        {
+            XPathNavigator methodNode = GetMethodNode(actionDescriptor);
+            return GetTagValue(methodNode, "returns");
+        }
+
         public string GetDocumentation(MemberInfo member)
         {
-            string memberName = string.Format(
-                CultureInfo.InvariantCulture, 
-                "{0}.{1}", 
-                GetTypeName(member.DeclaringType), 
-                member.Name);
+            string memberName = String.Format(CultureInfo.InvariantCulture, "{0}.{1}", GetTypeName(member.DeclaringType), member.Name);
             string expression = member.MemberType == MemberTypes.Field ? FieldExpression : PropertyExpression;
-            string selectExpression = string.Format(CultureInfo.InvariantCulture, expression, memberName);
-            XPathNavigator propertyNode = this._documentNavigator.SelectSingleNode(selectExpression);
+            string selectExpression = String.Format(CultureInfo.InvariantCulture, expression, memberName);
+            XPathNavigator propertyNode = _documentNavigator.SelectSingleNode(selectExpression);
             return GetTagValue(propertyNode, "summary");
         }
 
         public string GetDocumentation(Type type)
         {
-            XPathNavigator typeNode = this.GetTypeNode(type);
+            XPathNavigator typeNode = GetTypeNode(type);
             return GetTagValue(typeNode, "summary");
         }
 
-        public string GetResponseDocumentation(HttpActionDescriptor actionDescriptor)
+        private XPathNavigator GetMethodNode(HttpActionDescriptor actionDescriptor)
         {
-            XPathNavigator methodNode = this.GetMethodNode(actionDescriptor);
-            return GetTagValue(methodNode, "returns");
+            ReflectedHttpActionDescriptor reflectedActionDescriptor = actionDescriptor as ReflectedHttpActionDescriptor;
+            if (reflectedActionDescriptor != null)
+            {
+                string selectExpression = String.Format(CultureInfo.InvariantCulture, MethodExpression, GetMemberName(reflectedActionDescriptor.MethodInfo));
+                return _documentNavigator.SelectSingleNode(selectExpression);
+            }
+
+            return null;
         }
-
-        #endregion
-
-        #region Methods
 
         private static string GetMemberName(MethodInfo method)
         {
-            string name = string.Format(
-                CultureInfo.InvariantCulture, 
-                "{0}.{1}", 
-                GetTypeName(method.DeclaringType), 
-                method.Name);
+            string name = String.Format(CultureInfo.InvariantCulture, "{0}.{1}", GetTypeName(method.DeclaringType), method.Name);
             ParameterInfo[] parameters = method.GetParameters();
             if (parameters.Length != 0)
             {
                 string[] parameterTypeNames = parameters.Select(param => GetTypeName(param.ParameterType)).ToArray();
-                name += string.Format(CultureInfo.InvariantCulture, "({0})", string.Join(",", parameterTypeNames));
+                name += String.Format(CultureInfo.InvariantCulture, "({0})", String.Join(",", parameterTypeNames));
             }
 
             return name;
@@ -153,6 +127,13 @@ namespace Bog.Web.Api.Areas.HelpPage
             return null;
         }
 
+        private XPathNavigator GetTypeNode(Type type)
+        {
+            string controllerTypeName = GetTypeName(type);
+            string selectExpression = String.Format(CultureInfo.InvariantCulture, TypeExpression, controllerTypeName);
+            return _documentNavigator.SelectSingleNode(selectExpression);
+        }
+
         private static string GetTypeName(Type type)
         {
             string name = type.FullName;
@@ -166,13 +147,8 @@ namespace Bog.Web.Api.Areas.HelpPage
                 // Trim the generic parameter counts from the name
                 genericTypeName = genericTypeName.Substring(0, genericTypeName.IndexOf('`'));
                 string[] argumentTypeNames = genericArguments.Select(t => GetTypeName(t)).ToArray();
-                name = string.Format(
-                    CultureInfo.InvariantCulture, 
-                    "{0}{{{1}}}", 
-                    genericTypeName, 
-                    string.Join(",", argumentTypeNames));
+                name = String.Format(CultureInfo.InvariantCulture, "{0}{{{1}}}", genericTypeName, String.Join(",", argumentTypeNames));
             }
-
             if (type.IsNested)
             {
                 // Changing the nested type name from OuterType+InnerType to OuterType.InnerType to match the XML documentation syntax.
@@ -181,29 +157,5 @@ namespace Bog.Web.Api.Areas.HelpPage
 
             return name;
         }
-
-        private XPathNavigator GetMethodNode(HttpActionDescriptor actionDescriptor)
-        {
-            ReflectedHttpActionDescriptor reflectedActionDescriptor = actionDescriptor as ReflectedHttpActionDescriptor;
-            if (reflectedActionDescriptor != null)
-            {
-                string selectExpression = string.Format(
-                    CultureInfo.InvariantCulture, 
-                    MethodExpression, 
-                    GetMemberName(reflectedActionDescriptor.MethodInfo));
-                return this._documentNavigator.SelectSingleNode(selectExpression);
-            }
-
-            return null;
-        }
-
-        private XPathNavigator GetTypeNode(Type type)
-        {
-            string controllerTypeName = GetTypeName(type);
-            string selectExpression = string.Format(CultureInfo.InvariantCulture, TypeExpression, controllerTypeName);
-            return this._documentNavigator.SelectSingleNode(selectExpression);
-        }
-
-        #endregion
     }
 }
